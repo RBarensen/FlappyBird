@@ -17,10 +17,10 @@ function setup(){
 }
 
 function spel(){
+  background(achtergrond);
   snelheid += versnelling;
   yval += snelheid;
   image(vogel, width / 2, yval, massa + 20, massa - 10);
-  background(achtergrond);
 
   if (yval > height - massa / 2) {
     snelheid *= -0.6;
