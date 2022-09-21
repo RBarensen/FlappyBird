@@ -4,7 +4,7 @@ class rechthoek {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.color = "green";
+    this.color = "red";
   }
 
   drawrechthoek() {
@@ -12,7 +12,21 @@ class rechthoek {
     rect(this.x, this.y, this.w, this.h);
     this.x += -3;
   }
+
+  checkCollision() {
+    if (width / 2 + 50 > this.x && (width / 2) < this.x + this.w) {
+      if (yval + massa - 10 > this.y && yval < this.y + this.h) {
+        this.color = "red";
+      }
+    }
+    else {
+      this.color = "green";
+    }
+  }
 }
+
+
+
   
   
 var gif_createImg;
@@ -55,7 +69,7 @@ function spel() {
 
     pipes.push(pijp1);
     pipes.push(pijp2);
-
+ 
     // remove unnessecary pipes
     if (pipes.length > 6) {
       pipes.splice(0, 2);
@@ -64,6 +78,7 @@ function spel() {
 
     pipes.forEach((p) => {
     p.drawrechthoek()
+    p.checkCollision()  
   });
 }
 
