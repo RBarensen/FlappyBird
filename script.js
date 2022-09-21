@@ -6,7 +6,7 @@ var massa;
 
 
 
-function setup(){
+function setup() {
   createCanvas(640, 360);
   achtergrond = loadImage("images/achtergrond.jpg");
   yval = 0;
@@ -16,7 +16,7 @@ function setup(){
   versnelling = massa * 0.01;
 }
 
-function spel(){
+function spel() {
   background(achtergrond);
   snelheid += versnelling;
   yval += snelheid;
@@ -28,13 +28,15 @@ function spel(){
   }
 }
 
-function keyPressed(spacebar){
+function keyPressed(){
+ if (key == ' '){
   yval + 40;
-  velocity = -massa / 6;
+  snelheid = -massa / 6;
+  }
 }
 
-function draw(){
+function draw() {
 
-spel()
-  
+  spel()
+
 }
