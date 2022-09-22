@@ -36,6 +36,7 @@ var versnelling;
 var snelheid;
 var pipes = [];
 var massa;
+var rects = [];
 var score = 0;
 
 let gs = 0
@@ -81,6 +82,10 @@ function spel() {
     }
   }
 
+  if (frameCount % 95 == 0 && pipes.length > 3.6) {
+   score = score + 1;
+  } 
+
     pipes.forEach((p) => {
     p.drawrechthoek()
     p.checkCollision()  
@@ -88,10 +93,12 @@ function spel() {
 
   fill('white');
   textSize(25);
-  text('Score:', 50, 35)
+  text('Score:', 25, 35)
   text(score, 100, 35);
-}
 
+
+}
+ 
 function keyPressed(){
  if (key == ' '){
   yval + 50;
@@ -131,7 +138,7 @@ function mousePressed() {
 
   } else if (gs == 2) {
     pipes = [];
-
+    score = 0;
     gs = 0;
   }
 }
