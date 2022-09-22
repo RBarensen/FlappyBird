@@ -17,6 +17,7 @@ class rechthoek {
     if (width / 2 + 50 > this.x && (width / 2) < this.x + this.w) {
       if (yval + massa - 10 > this.y && yval < this.y + this.h) {
         this.color = "red";
+        gs = 2;
       }
     }
     else {
@@ -35,8 +36,9 @@ var versnelling;
 var snelheid;
 var pipes = [];
 var massa;
+var score = 0;
 
-
+let gs = 0
 
 function setup() {
   createCanvas(640, 360);
@@ -46,7 +48,10 @@ function setup() {
   massa = 50;
   vogel = loadImage("images/bird-png.webp");
   versnelling = massa * 0.01;
+  beginafb = loadImage("images/startscreen.png")
+  eindafb = loadImage("images/dood.jpg")
 }
+
 
 function spel() {
   background(achtergrond);
@@ -80,6 +85,11 @@ function spel() {
     p.drawrechthoek()
     p.checkCollision()  
   });
+
+  fill('white');
+  textSize(25);
+  text('Score:', 50, 35)
+  text(score, 100, 35);
 }
 
 function keyPressed(){
@@ -89,8 +99,40 @@ function keyPressed(){
   }
 }
 
+function start() {
+  background(beginafb);
+}
+
+function speelspel() {
+  spel();
+}
+
+function klaar() {
+  background(eindafb);
+}
+
 function draw() {
 
-  spel()
-
+   if (gs == 0) {
+    start();
+  } else if (gs == 1) {
+    speelspel();
+  }
+  else if (gs == 2) {
+    klaar();
+  }
 }
+
+function mousePressed() {
+  console.log(gs);
+  if (gs == 0) {
+    gs += 1;
+
+
+  } else if (gs == 2) {
+    pipes = [];
+
+    gs = 0;
+  }
+}
+
