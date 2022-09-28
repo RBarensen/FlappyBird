@@ -26,7 +26,13 @@ class rechthoek {
   }
 }
 
-
+function preload(){
+   backgroundMusic = loadSound('music/BackgroundMusic.mp3');
+   vogel = loadImage("images/bird-png.webp");
+   beginafb = loadImage("images/startscreen.png")
+   eindafb = loadImage("images/dood.jpg")
+   achtergrond = loadImage("images/achtergrond.jpg");
+}
 
   
   
@@ -43,14 +49,11 @@ let gs = 0
 
 function setup() {
   createCanvas(640, 360);
-  achtergrond = loadImage("images/achtergrond.jpg");
   yval = 0;
   snelheid = 0;
   massa = 50;
-  vogel = loadImage("images/bird-png.webp");
   versnelling = massa * 0.01;
-  beginafb = loadImage("images/startscreen.png")
-  eindafb = loadImage("images/dood.jpg")
+  backgroundMusic.play();
 }
 
 
@@ -82,7 +85,7 @@ function spel() {
     }
   }
 
-  if (frameCount % 95 == 0 && pipes.length > 3.6) {
+  if (frameCount % 92 == 0 && pipes.length > 3) {
    score = score + 1;
   } 
 
