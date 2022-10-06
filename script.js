@@ -1,17 +1,19 @@
 class rechthoek {
-  constructor(x, y, w, h) {
+  constructor(x, y, h, img) {
     this.x = x;
     this.y = y;
-    this.w = w;
     this.h = h;
+    this.w = 100;
+    this.img = img;
     this.color = "red";
   }
 
   drawrechthoek() {
     fill(this.color);
-    rect(this.x, this.y, this.w, this.h);
-    this.x += -3;
+    image(this.img, this.x, this.y, this.w, this.h);
+    this.x -= 5;
   }
+
 
   checkCollision() {
     if (width / 2 + 50 > this.x && (width / 2) < this.x + this.w) {
@@ -28,10 +30,13 @@ class rechthoek {
 
 function preload(){
    backgroundMusic = loadSound('music/BackgroundMusic.mp3');
+   ding = loadSound('music/Ding.mp3')
    vogel = loadImage("images/bird-png.webp");
    beginafb = loadImage("images/startscreen.png")
    eindafb = loadImage("images/dood.jpg")
    achtergrond = loadImage("images/achtergrond.jpg");
+   rck1 = loadImage("images/upward.png");
+   rck2 = loadImage("images/Downward2.png");
 }
 
   
@@ -73,8 +78,8 @@ function spel() {
 
     randomheight = random(height - 150);
 
-    pijp1 = new rechthoek(700, 0, 50, randomheight)
-    pijp2 = new rechthoek(700, randomheight + 150, 50, 300)
+    pijp1 = new rechthoek(700, 0, randomheight, rck2)
+    pijp2 = new rechthoek(700, randomheight + 150, 200, rck1)
 
     pipes.push(pijp1);
     pipes.push(pijp2);
@@ -85,9 +90,10 @@ function spel() {
     }
   }
 
-  if (frameCount % 92 == 0 && pipes.length > 3) {
+  if (frameCount % 85 == 0 && pipes.length > 3) {
    score = score + 1;
-  } 
+   ding.play();
+  }  
 
     pipes.forEach((p) => {
     p.drawrechthoek()
