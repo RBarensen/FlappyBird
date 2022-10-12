@@ -32,7 +32,7 @@ function preload(){
    backgroundMusic = loadSound('music/BackgroundMusic.mp3');
    ding = loadSound('music/Ding.mp3')
    vogel = loadImage("images/bird-png.webp");
-   beginafb = loadImage("images/Startscreen.png")
+   beginafb = loadImage("images/Startscreen.jfif")
    eindafb = loadImage("images/dood.jpg")
    achtergrond = loadImage("images/achtergrond.jpg");
    rck1 = loadImage("images/uwr.png");
@@ -131,9 +131,15 @@ function speelspel() {
 
 function klaar() {
   background(eindafb);
-  fill('white');
+  fill('aquamarine');
   textSize(100);
   text('Game Over', 80, 200);
+  textSize(25);
+  text('Your score is:', 80, 250);
+  text(score, 240, 250)
+  text('Your highscore is: ', 80, 280);
+  text(highscore, 285, 280);
+  text('Press to return to the main menu', 80, 310)
 }
 
 function draw() {
