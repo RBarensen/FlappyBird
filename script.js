@@ -1,24 +1,24 @@
-class rechthoek {
+class rechthoek { 
   constructor(x, y, h, img) {
     this.x = x;
     this.y = y;
     this.h = h;
-    this.w = 100;
+    this.w = 75;
     this.img = img;
     this.color = "red";
   }
 
   drawrechthoek() {
     fill(this.color);
-    image(this.img, this.x, this.y, this.w, this.h);
+    image(this.img, this.x, this.y, this.w, this.h);    
     this.x -= 5;
   }
 
 
   checkCollision() {
-    if (width / 2 + 50 > this.x && (width / 2) < this.x + this.w) {
-      if (yval + massa - 10 > this.y && yval < this.y + this.h) {
-        this.color = "red";
+    if (width / 2 + 20 > this.x && (width / 2) < this.x + this.w) {
+      if (yval + massa - 20 > this.y && yval < this.y + this.h) {
+        this.color = "red;"
         gs = 2;
       }
     }
@@ -32,11 +32,11 @@ function preload(){
    backgroundMusic = loadSound('music/BackgroundMusic.mp3');
    ding = loadSound('music/Ding.mp3')
    vogel = loadImage("images/bird-png.webp");
-   beginafb = loadImage("images/startscreen.png")
+   beginafb = loadImage("images/Startscreen.jpg")
    eindafb = loadImage("images/dood.jpg")
    achtergrond = loadImage("images/achtergrond.jpg");
-   rck1 = loadImage("images/upward.png");
-   rck2 = loadImage("images/Downward2.png");
+   rck1 = loadImage("images/uwr.png");
+   rck2 = loadImage("images/dwr.png");
 }
 
   
@@ -78,8 +78,8 @@ function spel() {
 
     randomheight = random(height - 150);
 
-    pijp1 = new rechthoek(700, 0, randomheight, rck2)
-    pijp2 = new rechthoek(700, randomheight + 150, 200, rck1)
+    pijp2 = new rechthoek(700, 0, randomheight + 10, rck2)
+    pijp1 = new rechthoek(700, randomheight + 150, 200, rck1)
 
     pipes.push(pijp1);
     pipes.push(pijp2);
@@ -125,6 +125,9 @@ function speelspel() {
 
 function klaar() {
   background(eindafb);
+  fill('white');
+  textSize(100);
+  text('Game Over', 80, 200);
 }
 
 function draw() {
