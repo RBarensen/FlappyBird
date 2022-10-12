@@ -16,7 +16,7 @@ class rechthoek {
 
 
   checkCollision() {
-    if (width / 2 + 20 > this.x && (width / 2) < this.x + this.w) {
+    if (width / 2 + 20 > this.x && (width / 2 + 40) < this.x + this.w) {
       if (yval + massa - 20 > this.y && yval < this.y + this.h) {
         this.color = "red;"
         gs = 2;
@@ -32,7 +32,7 @@ function preload(){
    backgroundMusic = loadSound('music/BackgroundMusic.mp3');
    ding = loadSound('music/Ding.mp3')
    vogel = loadImage("images/bird-png.webp");
-   beginafb = loadImage("images/Startscreen.jpg")
+   beginafb = loadImage("images/Startscreen.png")
    eindafb = loadImage("images/dood.jpg")
    achtergrond = loadImage("images/achtergrond.jpg");
    rck1 = loadImage("images/uwr.png");
@@ -49,6 +49,7 @@ var pipes = [];
 var massa;
 var rects = [];
 var score = 0;
+var highscore = 0;
 
 let gs = 0
 
@@ -78,8 +79,8 @@ function spel() {
 
     randomheight = random(height - 150);
 
-    pijp2 = new rechthoek(700, 0, randomheight + 10, rck2)
-    pijp1 = new rechthoek(700, randomheight + 150, 200, rck1)
+    pijp2 = new rechthoek(700, 0, randomheight + 50, rck2)
+    pijp1 = new rechthoek(700, randomheight + 175, 200, rck1)
 
     pipes.push(pijp1);
     pipes.push(pijp2);
@@ -93,6 +94,9 @@ function spel() {
   if (frameCount % 85 == 0 && pipes.length > 3) {
    score = score + 1;
    ding.play();
+  if (score > highscore){
+    highscore = score;
+  }
   }  
 
     pipes.forEach((p) => {
@@ -102,8 +106,10 @@ function spel() {
 
   fill('white');
   textSize(25);
-  text('Score:', 25, 35)
+  text('Score:', 25, 35);
   text(score, 100, 35);
+  text('Highscore:', 25, 75);
+  text(highscore, 145, 75);
 
 
 }
