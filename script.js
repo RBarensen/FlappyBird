@@ -1,4 +1,6 @@
+// creert class voor rechthoeken waarin de obstakels komen
 class rechthoek { 
+  // constructor voor de rechthoeken
   constructor(x, y, h, img) {
     this.x = x;
     this.y = y;
@@ -7,14 +9,13 @@ class rechthoek {
     this.img = img;
     this.color = "red";
   }
-
+// tekent rechthoek met afbeeldingen erin
   drawrechthoek() {
-    fill(this.color);
     image(this.img, this.x, this.y, this.w, this.h);    
     this.x -= 5;
   }
 
-
+// controleert of de astronaut de obstakels raakt
   checkCollision() {
     if (width / 2 + 20 > this.x && (width / 2 + 40) < this.x + this.w) {
       if (yval + massa - 20 > this.y && yval < this.y + this.h) {
@@ -28,6 +29,7 @@ class rechthoek {
   }
 }
 
+// zet elke afbeeldingen en elk geluid in een variabele
 function preload(){
    backgroundMusic = loadSound('music/BackgroundMusic.mp3');
    ding = loadSound('music/Ding.mp3')
@@ -40,7 +42,7 @@ function preload(){
 }
 
   
-  
+ // geeft default voor een aantal variabelen 
 var gif_createImg;
 var yval;
 var versnelling;
@@ -50,9 +52,9 @@ var massa;
 var rects = [];
 var score = 0;
 var highscore = 0;
+let gs = 0;
 
-let gs = 0
-
+// zorgt voor de basis van het spel
 function setup() {
   createCanvas(640, 360);
   yval = 0;
@@ -63,6 +65,7 @@ function setup() {
 }
 
 
+// zorgt voor het daadwerkelijke spel > eg. beweging vogel, achtergrond, en obstakels
 function spel() {
   background(achtergrond);
   snelheid += versnelling;
@@ -79,18 +82,21 @@ function spel() {
 
     randomheight = random(height - 150);
 
+    // zorgt voor nieuwe obstakels
     pijp2 = new rechthoek(700, 0, randomheight + 50, rck2)
     pijp1 = new rechthoek(700, randomheight + 175, 200, rck1)
 
     pipes.push(pijp1);
     pipes.push(pijp2);
  
-    // remove unnessecary pipes
+    // haalt onnodige obstakels weg
     if (pipes.length > 6) {
       pipes.splice(0, 2);
     }
   }
 
+
+  // reguleert alle processen voor als astronaut door een obstakel is
   if (frameCount % 85 == 0 && pipes.length > 3) {
    score = score + 1;
    ding.play();
@@ -98,12 +104,13 @@ function spel() {
     highscore = score;
   }
   }  
-
+// tekent elk obstakel
     pipes.forEach((p) => {
     p.drawrechthoek()
     p.checkCollision()  
   });
 
+  // zorgt voor tekst linksboven met (high)score
   fill('white');
   textSize(25);
   text('Score:', 25, 35);
@@ -113,7 +120,8 @@ function spel() {
 
 
 }
- 
+
+// reguleert het springen van de astronaut
 function keyPressed(){
  if (key == ' '){
   yval + 50;
@@ -121,6 +129,7 @@ function keyPressed(){
   }
 }
 
+// functies die bij verschillende gamestates horen
 function start() {
   background(beginafb);
 }
@@ -142,6 +151,7 @@ function klaar() {
   text('Press to return to the main menu', 80, 310)
 }
 
+// tekent het spel voor elke gamestate
 function draw() {
 
    if (gs == 0) {
@@ -154,12 +164,14 @@ function draw() {
   }
 }
 
+// laat van gamestates switchen
 function mousePressed() {
   console.log(gs);
   if (gs == 0) {
     gs += 1;
 
 
+// reset alle relevante variabelen
   } else if (gs == 2) {
     pipes = [];
     score = 0;
